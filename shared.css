@@ -1,0 +1,804 @@
+/* Théoden Clinic — dark rococo archival identity */
+
+:root {
+  --bg: #181818;
+  --ink: #c0d0c0;
+  --metal: #a89b89;
+  --shadow: #080808;
+  --mute: #303030;
+  --ink-dim: rgba(192, 208, 192, 0.62);
+  --ink-faint: rgba(192, 208, 192, 0.38);
+  --metal-dim: rgba(168, 155, 137, 0.75);
+  --font: "Cormorant Garamond", "EB Garamond", "Bodoni Moda", "Times New Roman", serif;
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --dur: 900ms;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+  background: var(--bg);
+}
+
+body {
+  margin: 0;
+  min-height: 100%;
+  min-height: 100dvh;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font);
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+::selection {
+  background: var(--mute);
+  color: var(--ink);
+}
+
+/* ——— Screens (entrance / nav) ——— */
+
+.stage {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--bg);
+}
+
+.screen {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1.25rem, 4vw, 2.5rem);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity var(--dur) var(--ease),
+    visibility 0s linear var(--dur);
+}
+
+.screen.is-active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition:
+    opacity var(--dur) var(--ease),
+    visibility 0s linear 0s;
+}
+
+.screen.is-leaving {
+  opacity: 0;
+  visibility: visible;
+  pointer-events: none;
+}
+
+/* Entrance */
+
+.entrance {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.85rem, 2.2vh, 1.35rem);
+  width: min(100%, 26rem);
+  text-align: center;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.entrance:focus-visible {
+  outline: 1px solid var(--metal-dim);
+  outline-offset: 14px;
+}
+
+.entrance-portrait {
+  width: min(78vw, 16.5rem);
+  transition:
+    opacity 700ms var(--ease),
+    transform 900ms var(--ease),
+    filter 700ms var(--ease);
+}
+
+.entrance-label {
+  width: min(62vw, 13.5rem);
+  transition:
+    opacity 700ms var(--ease),
+    transform 900ms var(--ease),
+    filter 700ms var(--ease);
+}
+
+.entrance.is-hover .entrance-portrait,
+.entrance:hover .entrance-portrait,
+.entrance:focus-visible .entrance-portrait {
+  opacity: 0.9;
+  transform: scale(1.012);
+  filter: brightness(1.03);
+}
+
+.entrance.is-hover .entrance-label,
+.entrance:hover .entrance-label,
+.entrance:focus-visible .entrance-label {
+  opacity: 0.92;
+  filter: brightness(1.06);
+}
+
+.entrance-portrait img,
+.entrance-label img {
+  width: 100%;
+  height: auto;
+  user-select: none;
+  pointer-events: none;
+}
+
+body.is-entering .entrance-portrait,
+body.is-entering .entrance-label {
+  opacity: 0;
+  transform: scale(0.988);
+}
+
+/* Main navigation */
+
+.nav-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: min(100%, 22rem);
+  transform: translateY(0.55rem);
+  opacity: 0;
+  transition:
+    opacity var(--dur) var(--ease),
+    transform var(--dur) var(--ease);
+}
+
+#screen-nav.is-active .nav-panel {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.site-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1.05rem, 3vh, 1.7rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-nav a {
+  display: inline-block;
+  padding: 0.15rem 0.35rem;
+  font-size: clamp(0.72rem, 1.7vw, 0.86rem);
+  font-weight: 400;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--ink);
+  transition: color 550ms var(--ease), opacity 550ms var(--ease);
+}
+
+.site-nav a:hover,
+.site-nav a:focus-visible {
+  color: var(--metal);
+  outline: none;
+}
+
+.nav-ornament {
+  margin-top: clamp(1.75rem, 4.8vh, 2.85rem);
+  width: min(46vw, 8.25rem);
+  opacity: 0.92;
+  pointer-events: none;
+}
+
+.nav-ornament img {
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+/* ——— Inner pages ——— */
+
+.page {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: clamp(2.25rem, 7vh, 4.5rem) clamp(1.15rem, 4vw, 2.25rem)
+    clamp(2.75rem, 8vh, 5rem);
+  background: var(--bg);
+  animation: page-in 850ms var(--ease) both;
+}
+
+.page--center {
+  justify-content: center;
+}
+
+@keyframes page-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .screen,
+  .nav-panel,
+  .entrance-portrait,
+  .entrance-label,
+  .site-nav a,
+  .page {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+.page-inner {
+  width: min(100%, 36rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.page-figure {
+  width: min(100%, 22rem);
+  margin: 0 auto;
+}
+
+.page-figure--id {
+  width: min(100%, 24rem);
+}
+
+.page-figure--pour {
+  width: min(100%, 26rem);
+}
+
+.page-figure--pour img {
+  mask-image: linear-gradient(to bottom, #000 72%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 72%, transparent 100%);
+}
+
+.page-figure img {
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.page-copy {
+  margin: clamp(1.35rem, 3.5vh, 2.25rem) 0 0;
+  max-width: 32rem;
+}
+
+.eyebrow {
+  margin: 0 0 0.75rem;
+  font-size: clamp(0.58rem, 1.4vw, 0.68rem);
+  font-weight: 400;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.page-title {
+  margin: 0 0 1.25rem;
+  font-size: clamp(1.05rem, 2.8vw, 1.4rem);
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.prose {
+  margin: 0;
+  font-size: clamp(0.68rem, 1.55vw, 0.8rem);
+  font-weight: 400;
+  line-height: 1.9;
+  letter-spacing: 0.055em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-align: center;
+}
+
+.prose + .prose {
+  margin-top: 1.4rem;
+}
+
+/* ——— Medical record sections ——— */
+
+.page-inner--record {
+  width: min(100%, 38rem);
+  align-items: stretch;
+  text-align: left;
+}
+
+.record {
+  width: 100%;
+  border-top: 1px solid var(--mute);
+  border-bottom: 1px solid var(--mute);
+  padding: clamp(1.25rem, 3.5vh, 2rem) 0;
+}
+
+.record-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.45rem 1.25rem;
+  margin: 0 0 1.5rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid rgba(48, 48, 48, 0.9);
+  font-size: clamp(0.55rem, 1.3vw, 0.64rem);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--metal);
+}
+
+.record-file {
+  margin: 0 0 1.75rem;
+  font-size: clamp(0.9rem, 2.4vw, 1.15rem);
+  font-weight: 400;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-align: center;
+}
+
+.record-block + .record-block {
+  margin-top: clamp(1.6rem, 4vh, 2.35rem);
+  padding-top: clamp(1.35rem, 3.2vh, 1.85rem);
+  border-top: 1px solid rgba(48, 48, 48, 0.75);
+}
+
+.record-heading {
+  margin: 0 0 0.85rem;
+  font-size: clamp(0.62rem, 1.45vw, 0.72rem);
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--metal);
+}
+
+.record .prose {
+  text-align: left;
+  max-width: none;
+}
+
+.record-index {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.record-index li {
+  margin: 0;
+  padding: 0 0 1.05rem;
+  border-bottom: 1px solid rgba(48, 48, 48, 0.55);
+}
+
+.record-index li:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.record-index strong {
+  display: block;
+  margin: 0 0 0.4rem;
+  font-size: clamp(0.68rem, 1.55vw, 0.8rem);
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.record-index span {
+  display: block;
+  font-size: clamp(0.66rem, 1.5vw, 0.76rem);
+  font-weight: 400;
+  line-height: 1.8;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+
+/* subtle interface accents per root page */
+.page--dossier .record-meta { color: var(--ink-dim); }
+.page--facility .record {
+  border-color: rgba(168, 155, 137, 0.28);
+}
+.page--research .record-index strong {
+  color: var(--metal);
+}
+.page--archive .record-file {
+  letter-spacing: 0.32em;
+}
+
+.terms-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  width: min(100%, 32rem);
+  text-align: left;
+}
+
+.terms-list li {
+  position: relative;
+  margin: 0 0 1.4rem;
+  padding-left: 1.55rem;
+  font-size: clamp(0.66rem, 1.5vw, 0.78rem);
+  font-weight: 400;
+  line-height: 1.85;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.terms-list li::before {
+  content: attr(data-num);
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--ink);
+  letter-spacing: 0.08em;
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: clamp(1.85rem, 5vh, 3rem);
+  width: min(42vw, 7.5rem);
+  opacity: 0.9;
+  transition: opacity 550ms var(--ease), transform 550ms var(--ease);
+}
+
+.back:hover,
+.back:focus-visible {
+  opacity: 1;
+  transform: scale(1.04);
+  outline: none;
+}
+
+.back img {
+  width: 100%;
+  height: auto;
+}
+
+/* Lookbook — vertical archival stack */
+
+.gallery {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1.1rem, 3vh, 1.85rem);
+  width: min(100%, 28rem);
+  margin: 0 auto;
+}
+
+.gallery figure {
+  margin: 0;
+  width: 100%;
+  background: var(--shadow);
+}
+
+.gallery img {
+  width: 100%;
+  height: auto;
+  transition: opacity 650ms var(--ease);
+}
+
+.gallery figure:hover img {
+  opacity: 0.88;
+}
+
+@media (min-width: 720px) {
+  .entrance-portrait {
+    width: min(36vw, 18rem);
+  }
+
+  .entrance-label {
+    width: min(28vw, 14.5rem);
+  }
+
+  .page-figure--id {
+    width: min(100%, 26rem);
+  }
+}
+
+@media (max-width: 480px) {
+  .site-nav a {
+    letter-spacing: 0.28em;
+  }
+}
+
+/* ——— Consultation (parchment dossier) ——— */
+
+.page--consult {
+  justify-content: flex-start;
+  gap: clamp(1.5rem, 4vh, 2.5rem);
+}
+
+.consult-shell {
+  width: min(100%, 40rem);
+}
+
+.consult-card {
+  position: relative;
+  padding: clamp(1.35rem, 3.5vw, 2rem) clamp(1.1rem, 3vw, 1.85rem)
+    clamp(1.5rem, 3.5vw, 2.15rem);
+  color: #1c1712;
+  background: #c4a882 url("parchment.jpg") center / cover no-repeat;
+  border: 1px solid #1a1510;
+  box-shadow:
+    inset 0 0 0 1px rgba(26, 21, 16, 0.28),
+    0 0 0 1px rgba(8, 8, 8, 0.35);
+}
+
+.consult-card::before,
+.consult-card::after {
+  content: "";
+  position: absolute;
+  inset: 0.4rem;
+  pointer-events: none;
+  border: 1px solid rgba(26, 21, 16, 0.55);
+}
+
+.consult-card::after {
+  inset: 0.55rem;
+  border-color: transparent;
+  background:
+    linear-gradient(#1a1510, #1a1510) top left / 18px 1px no-repeat,
+    linear-gradient(#1a1510, #1a1510) top left / 1px 18px no-repeat,
+    linear-gradient(#1a1510, #1a1510) top right / 18px 1px no-repeat,
+    linear-gradient(#1a1510, #1a1510) top right / 1px 18px no-repeat,
+    linear-gradient(#1a1510, #1a1510) bottom left / 18px 1px no-repeat,
+    linear-gradient(#1a1510, #1a1510) bottom left / 1px 18px no-repeat,
+    linear-gradient(#1a1510, #1a1510) bottom right / 18px 1px no-repeat,
+    linear-gradient(#1a1510, #1a1510) bottom right / 1px 18px no-repeat;
+}
+
+.consult-header {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.consult-rule {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  margin-bottom: 0.35rem;
+}
+
+.consult-rule-line {
+  display: block;
+  width: min(28vw, 7.5rem);
+  height: 1px;
+  background: #1a1510;
+}
+
+.consult-heart {
+  width: 3.4rem;
+  height: auto;
+  filter: grayscale(1) contrast(1.15);
+  mix-blend-mode: multiply;
+}
+
+.consult-brand-top {
+  margin: 0;
+  font-family: "Great Vibes", "Cormorant Garamond", cursive;
+  font-size: clamp(1.35rem, 4vw, 1.85rem);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  color: #1a1510;
+  text-transform: none;
+}
+
+.consult-brand {
+  margin: 0.1rem 0 0.55rem;
+  font-family: "Great Vibes", "Cormorant Garamond", cursive;
+  font-size: clamp(2.6rem, 9vw, 4rem);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 0.9;
+  color: #1a1510;
+  text-transform: none;
+}
+
+.consult-kicker {
+  margin: 0;
+  font-size: clamp(0.62rem, 1.5vw, 0.74rem);
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #1a1510;
+}
+
+.consult-intro {
+  margin: 0 auto 1.25rem;
+  max-width: 34rem;
+  text-align: center;
+}
+
+.consult-intro p {
+  margin: 0 0 0.7rem;
+  font-size: clamp(0.68rem, 1.55vw, 0.78rem);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.55;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  color: #1a1510;
+}
+
+.consult-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  width: min(100%, 32rem);
+  margin: 0 auto;
+}
+
+.consult-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.consult-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.28rem;
+  text-align: left;
+}
+
+.consult-field span {
+  font-size: clamp(0.58rem, 1.35vw, 0.68rem);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #1a1510;
+}
+
+.consult-field input,
+.consult-field select,
+.consult-field textarea {
+  width: 100%;
+  margin: 0;
+  padding: 0.45rem 0.5rem;
+  font-family: var(--font);
+  font-size: 0.85rem;
+  color: #1a1510;
+  background: rgba(236, 220, 190, 0.28);
+  border: 1px solid #1a1510;
+  border-radius: 0;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.consult-field select {
+  background-image: linear-gradient(45deg, transparent 50%, #1a1510 50%),
+    linear-gradient(135deg, #1a1510 50%, transparent 50%);
+  background-position: calc(100% - 14px) 55%, calc(100% - 9px) 55%;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+  padding-right: 1.6rem;
+}
+
+.consult-field textarea {
+  min-height: 5.5rem;
+  resize: vertical;
+}
+
+.consult-field input:focus,
+.consult-field select:focus,
+.consult-field textarea:focus {
+  background: rgba(236, 220, 190, 0.42);
+}
+
+.consult-submit {
+  align-self: center;
+  margin-top: 0.35rem;
+  padding: 0.55rem 1.4rem;
+  font-family: var(--font);
+  font-size: clamp(0.66rem, 1.5vw, 0.76rem);
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #1a1510;
+  background: transparent;
+  border: 3px double #1a1510;
+  cursor: pointer;
+  transition: background 450ms var(--ease), color 450ms var(--ease);
+}
+
+.consult-submit:hover,
+.consult-submit:focus-visible {
+  background: rgba(26, 21, 16, 0.08);
+  outline: none;
+}
+
+.consult-honeypot {
+  position: absolute !important;
+  left: -10000px !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+.consult-submit:disabled {
+  opacity: 0.55;
+  cursor: wait;
+}
+
+.consult-note,
+.consult-error {
+  margin: 0.35rem 0 0;
+  text-align: center;
+  font-size: 0.72rem;
+  font-style: italic;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  color: #1a1510;
+}
+
+.consult-error {
+  color: #5c1f1f;
+}
+
+.consult-discretion {
+  margin: 0.15rem 0 0;
+  text-align: center;
+  font-size: clamp(0.62rem, 1.4vw, 0.72rem);
+  font-style: italic;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  color: #1a1510;
+}
+
+.page--consult .back {
+  margin-top: 0;
+}
+
+@media (max-width: 560px) {
+  .consult-row {
+    grid-template-columns: 1fr;
+  }
+}
