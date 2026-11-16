@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#181818" />
+  <title>Théoden Yegor — The Clinic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="shared.css" />
+</head>
+<body>
+  <main class="stage" id="stage">
+    <section class="screen is-active" id="screen-entrance" aria-label="Entrance" aria-hidden="false">
+      <button type="button" class="entrance" id="entrance" aria-label="Enter the clinic">
+        <span class="entrance-portrait">
+          <img src="portrait.png" alt="" width="1080" height="1350" />
+        </span>
+        <span class="entrance-label">
+          <img src="enter.png" alt="Enter the Clinic" width="787" height="262" />
+        </span>
+      </button>
+    </section>
+
+    <section class="screen" id="screen-nav" aria-label="Main navigation" aria-hidden="true">
+      <div class="nav-panel">
+        <nav aria-label="Clinic">
+          <ul class="site-nav">
+            <li><a href="identification.html">Identification</a></li>
+            <li><a href="atelier.html">Atelier</a></li>
+            <li><a href="archive.html">Archive</a></li>
+            <li><a href="dossier.html">Dossier</a></li>
+            <li><a href="facility.html">Facility</a></li>
+            <li><a href="research.html">Research</a></li>
+            <li><a href="lookbook.html">Lookbook</a></li>
+            <li><a href="consultation.html">Book a Consultation Today</a></li>
+            <li><a href="terms.html">Terms of Service</a></li>
+          </ul>
+        </nav>
+        <div class="nav-ornament" aria-hidden="true">
+          <img src="sword.png" alt="" width="394" height="263" />
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    if (location.hash === "#enter") {
+      try { sessionStorage.removeItem("theoden-entered"); } catch (_) {}
+    }
+  </script>
+  <script src="shared.js"></script>
+</body>
+</html>
