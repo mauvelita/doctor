@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#181818" />
+  <title>Atelier — Théoden Yegor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="shared.css" />
+</head>
+<body>
+  <main class="page">
+    <div class="page-inner">
+      <figure class="page-figure page-figure--pour">
+        <img src="pour.png" alt="Théoden pouring" width="1199" height="1424" />
+      </figure>
+      <div class="page-copy">
+        <p class="eyebrow">Underground Surgeon. Architect of Impossible Bodies.</p>
+        <h1 class="page-title">Théoden Yegor</h1>
+        <p class="prose">
+théoden has never considered the human body a finished work. his practice exists somewhere between surgery, biomechanics, and an increasingly personal understanding of aesthetics. working beyond conventional medicine, he develops synthetic integrations and reconstructive procedures that push the body far beyond its natural capabilities.
+
+his interest extends well beyond restoration. he is concerned with what the body might become, what can be replaced, and how far its original design can be taken before it becomes something else entirely.
+
+his work is conducted privately, away from medical oversight and public scrutiny. each commission is an opportunity to test the limits of human anatomy.
+        </p>
+      </div>
+      <a class="back" href="index.html" aria-label="Return to main navigation">
+        <img src="sword.png" alt="" width="394" height="263" />
+      </a>
+    </div>
+  </main>
+</body>
+</html>
