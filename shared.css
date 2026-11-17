@@ -499,10 +499,13 @@ body.is-entering .entrance-label {
 }
 
 .back {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
+  align-self: center;
   margin-top: clamp(1.85rem, 5vh, 3rem);
+  margin-left: auto;
+  margin-right: auto;
   width: min(34vw, 5.5rem);
   opacity: 0.9;
   transition: opacity 550ms var(--ease), transform 550ms var(--ease);
@@ -516,8 +519,10 @@ body.is-entering .entrance-label {
 }
 
 .back img {
+  display: block;
   width: 100%;
   height: auto;
+  margin: 0 auto;
 }
 
 /* Lookbook — framed slideshow (square frame fit, autoplay) */
