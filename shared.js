@@ -2,6 +2,7 @@
   const entrance = document.getElementById("entrance");
   const screenEntrance = document.getElementById("screen-entrance");
   const screenNav = document.getElementById("screen-nav");
+  const navSword = document.getElementById("nav-sword");
   if (!entrance || !screenEntrance || !screenNav) return;
 
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -9,6 +10,7 @@
 
   const showNav = () => {
     document.body.classList.add("is-entered");
+    document.body.classList.remove("is-entering");
     screenEntrance.classList.remove("is-active");
     screenEntrance.classList.add("is-leaving");
     screenNav.classList.add("is-active");
@@ -22,6 +24,27 @@
     try {
       sessionStorage.setItem("theoden-entered", "1");
     } catch (_) {}
+
+    if (location.hash === "#enter") {
+      history.replaceState(null, "", location.pathname + location.search);
+    }
+  };
+
+  const showEntrance = () => {
+    document.body.classList.remove("is-entered", "is-entering");
+    screenNav.classList.remove("is-active");
+    screenNav.setAttribute("aria-hidden", "true");
+    screenEntrance.classList.remove("is-leaving");
+    screenEntrance.classList.add("is-active");
+    screenEntrance.setAttribute("aria-hidden", "false");
+
+    try {
+      sessionStorage.removeItem("theoden-entered");
+    } catch (_) {}
+
+    if (location.hash !== "#enter") {
+      history.replaceState(null, "", "#enter");
+    }
   };
 
   const entered = (() => {
@@ -42,7 +65,10 @@
 
   const enter = (event) => {
     if (event) event.preventDefault();
-    if (document.body.classList.contains("is-entering") || document.body.classList.contains("is-entered")) {
+    if (
+      document.body.classList.contains("is-entering") ||
+      document.body.classList.contains("is-entered")
+    ) {
       return;
     }
     document.body.classList.add("is-entering");
@@ -59,4 +85,17 @@
 
   entrance.addEventListener("pointerenter", () => entrance.classList.add("is-hover"));
   entrance.addEventListener("pointerleave", () => entrance.classList.remove("is-hover"));
+
+  if (navSword) {
+    navSword.addEventListener("click", (event) => {
+      event.preventDefault();
+      showEntrance();
+    });
+  }
+
+  window.addEventListener("hashchange", () => {
+    if (location.hash === "#enter") {
+      showEntrance();
+    }
+  });
 })();
