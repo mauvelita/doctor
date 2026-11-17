@@ -27,9 +27,7 @@
           <img src="look10.jpeg" alt="" />
         </div>
         <img class="look-frame" src="frame.png" alt="" />
-        <button type="button" class="look-hit" id="look-next" aria-label="Next look"></button>
       </div>
-      <p class="look-hint">Tap the frame to advance</p>
 
       <a class="back" href="index.html#enter" aria-label="Return to Enter the Clinic">
         <img src="sword.png" alt="" width="394" height="263" />
@@ -40,12 +38,11 @@
   <script>
     (() => {
       const slides = Array.from(document.querySelectorAll("#look-window img"));
-      const nextBtn = document.getElementById("look-next");
-      if (!slides.length || !nextBtn) return;
+      if (slides.length < 2) return;
 
       let i = 0;
       const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      const interval = reduce ? 0 : 4200;
+      const ms = reduce ? 0 : 3800;
 
       const show = (n) => {
         slides[i].classList.remove("is-active");
@@ -53,10 +50,8 @@
         slides[i].classList.add("is-active");
       };
 
-      nextBtn.addEventListener("click", () => show(i + 1));
-
-      if (interval) {
-        window.setInterval(() => show(i + 1), interval);
+      if (ms) {
+        window.setInterval(() => show(i + 1), ms);
       }
     })();
   </script>
