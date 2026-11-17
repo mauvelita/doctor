@@ -868,6 +868,57 @@ body.is-entering .entrance-label {
   margin-top: 0;
 }
 
+/* Atelier — image flush to top, fade into page */
+
+.page--atelier {
+  padding-top: 0;
+  padding-left: 0;
+  padding-right: 0;
+  gap: 0;
+}
+
+.atelier-hero {
+  width: min(100%, 28rem);
+  margin: 0 auto;
+  padding: 0;
+}
+
+.atelier-hero img {
+  width: 100%;
+  height: auto;
+  display: block;
+  mask-image: linear-gradient(to bottom, #000 68%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 68%, transparent 100%);
+}
+
+.atelier-copy {
+  width: min(100%, 32rem);
+  padding: 0 clamp(1.15rem, 4vw, 2.25rem) clamp(2rem, 6vh, 3.5rem);
+  margin-top: -1.25rem;
+}
+
+.atelier-copy .eyebrow {
+  margin-bottom: 0.55rem;
+}
+
+.atelier-copy .page-title {
+  margin-bottom: 0.95rem;
+}
+
+.atelier-copy .prose {
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.atelier-copy .prose + .prose,
+.atelier-copy .prose {
+  white-space: pre-line;
+}
+
+.page--atelier .back {
+  margin-top: 1.5rem;
+}
+
 @media (max-width: 560px) {
   .consult-row {
     grid-template-columns: 1fr;
