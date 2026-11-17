@@ -4,31 +4,137 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#181818" />
-  <title>Lookbook — Théoden Yegor</title>
+  <title>Book a Consultation — Théoden Yegor</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="shared.css" />
 </head>
 <body>
-  <main class="page">
-    <div class="page-inner" style="width: min(100%, 28rem);">
-      <div class="gallery" aria-label="Lookbook gallery">
-        <figure><img src="look1.jpeg" alt="" width="1089" height="1122" loading="lazy" /></figure>
-        <figure><img src="look2.jpeg" alt="" width="1305" height="1305" loading="lazy" /></figure>
-        <figure><img src="look3.jpeg" alt="" width="734" height="734" loading="lazy" /></figure>
-        <figure><img src="look4.jpeg" alt="" width="596" height="596" loading="lazy" /></figure>
-        <figure><img src="look5.jpeg" alt="" width="999" height="999" loading="lazy" /></figure>
-        <figure><img src="look6.jpeg" alt="" width="1305" height="1305" loading="lazy" /></figure>
-        <figure><img src="look7.jpeg" alt="" width="545" height="545" loading="lazy" /></figure>
-        <figure><img src="look8.jpeg" alt="" width="713" height="713" loading="lazy" /></figure>
-        <figure><img src="look9.jpeg" alt="" width="1305" height="1305" loading="lazy" /></figure>
-        <figure><img src="look10.jpeg" alt="" width="1200" height="1200" loading="lazy" /></figure>
-      </div>
-      <a class="back" href="index.html" aria-label="Return to main navigation">
-        <img src="sword.png" alt="" width="394" height="263" />
-      </a>
+  <main class="page page--consult">
+    <div class="consult-shell">
+      <article class="consult-card" aria-label="Private consultations">
+        <header class="consult-header">
+          <div class="consult-rule" aria-hidden="true">
+            <span class="consult-rule-line"></span>
+            <img class="consult-heart" src="heart.png" alt="" width="200" height="160" />
+            <span class="consult-rule-line"></span>
+          </div>
+          <img class="consult-logo" src="form.png" alt="Impossible Bodies Clinic" />
+          <p class="consult-kicker">Private Consultations</p>
+        </header>
+
+        <div class="consult-intro">
+          <p>
+            Those interested in seeking treatment or discussing a potential procedure at Impossible Bodies are invited to submit a consultation request through the form below.
+          </p>
+          <p>
+            Please provide the necessary details regarding your inquiry, including the nature of the procedure you wish to discuss and any relevant medical history. All submissions are reviewed privately, and appointments are arranged at the clinic’s discretion.
+          </p>
+          <p>
+            Submission of a request does not guarantee an appointment. Prospective clients will be contacted should their inquiry be of interest to the doctor.
+          </p>
+        </div>
+
+        <form class="consult-form" id="consult-form" novalidate>
+          <div class="consult-row">
+            <label class="consult-field">
+              <span>Full Name *</span>
+              <input type="text" name="full_name" required autocomplete="name" />
+            </label>
+            <label class="consult-field">
+              <span>Contact Email *</span>
+              <input type="email" name="email" required autocomplete="email" />
+            </label>
+          </div>
+
+          <div class="consult-row">
+            <label class="consult-field">
+              <span>Phone Number</span>
+              <input type="tel" name="phone" autocomplete="tel" />
+            </label>
+            <label class="consult-field">
+              <span>Preferred Method of Contact</span>
+              <select name="contact_method">
+                <option value="">Please Select</option>
+                <option value="email">Email</option>
+                <option value="phone">Phone</option>
+                <option value="either">Either</option>
+              </select>
+            </label>
+          </div>
+
+          <label class="consult-field consult-field--full">
+            <span>Nature of Inquiry *</span>
+            <textarea name="inquiry" rows="5" required></textarea>
+          </label>
+
+          <label class="consult-field consult-field--full">
+            <span>Additional Details</span>
+            <textarea name="details" rows="5"></textarea>
+          </label>
+
+          <button type="submit" class="consult-submit">Submit Request</button>
+          <p class="consult-note" id="consult-note" hidden>
+            Your mail app will open with the clinic already set as the recipient. Press send there.
+          </p>
+          <p class="consult-discretion">Your information will be handled with the utmost discretion.</p>
+        </form>
+      </article>
     </div>
+
+    <a class="back" href="index.html#enter" aria-label="Return to Enter the Clinic">
+      <img src="sword.png" alt="" width="394" height="263" />
+    </a>
   </main>
+
+  <script>
+    (() => {
+      const DOCTOR_EMAIL = "impossiblebodies.clinic@gmail.com";
+      const form = document.getElementById("consult-form");
+      const note = document.getElementById("consult-note");
+      if (!form || !note) return;
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        if (!form.reportValidity()) return;
+
+        const data = new FormData(form);
+        const fullName = String(data.get("full_name") || "").trim();
+        const replyEmail = String(data.get("email") || "").trim();
+        const phone = String(data.get("phone") || "").trim();
+        const method = String(data.get("contact_method") || "").trim();
+        const inquiry = String(data.get("inquiry") || "").trim();
+        const details = String(data.get("details") || "").trim();
+
+        const subject = "Impossible Bodies — Consultation Request";
+        const body = [
+          "Impossible Bodies — Consultation Request",
+          "",
+          "Full Name: " + fullName,
+          "Contact Email: " + replyEmail,
+          "Phone Number: " + (phone || "—"),
+          "Preferred Method of Contact: " + (method || "—"),
+          "",
+          "Nature of Inquiry:",
+          inquiry,
+          "",
+          "Additional Details:",
+          details || "—",
+        ].join("\r\n");
+
+        const href =
+          "mailto:" +
+          DOCTOR_EMAIL +
+          "?subject=" +
+          encodeURIComponent(subject) +
+          "&body=" +
+          encodeURIComponent(body);
+
+        note.hidden = false;
+        window.location.assign(href);
+      });
+    })();
+  </script>
 </body>
 </html>
