@@ -833,6 +833,15 @@ body.is-entering .entrance-label {
   color: #1a1510;
 }
 
+.consult-kicker {
+  margin: 0.15rem 0 0;
+  font-size: clamp(0.52rem, 1.25vw, 0.62rem);
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #1a1510;
+}
+
 .page--consult .back {
   margin-top: 0;
 }
