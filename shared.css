@@ -190,7 +190,7 @@ body.is-entering .entrance-label {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.55rem;
+  gap: 0.28rem;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -198,8 +198,9 @@ body.is-entering .entrance-label {
 
 .site-nav a {
   display: inline-block;
-  padding: 0.05rem 0.35rem;
-  font-size: clamp(0.7rem, 1.65vw, 0.82rem);
+  padding: 0;
+  line-height: 1.35;
+  font-size: clamp(0.68rem, 1.6vw, 0.8rem);
   font-weight: 400;
   letter-spacing: 0.34em;
   text-transform: uppercase;
@@ -214,16 +215,28 @@ body.is-entering .entrance-label {
 }
 
 .nav-ornament {
-  margin-top: 1.35rem;
+  display: block;
+  margin-top: 1.15rem;
   width: min(34vw, 5.5rem);
   opacity: 0.92;
-  pointer-events: none;
+  cursor: pointer;
+  background: none;
+  border: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.nav-ornament:hover,
+.nav-ornament:focus-visible {
+  opacity: 1;
+  outline: none;
 }
 
 .nav-ornament img {
   width: 100%;
   height: auto;
   margin: 0 auto;
+  pointer-events: none;
 }
 
 /* ——— Inner pages ——— */
