@@ -7,7 +7,7 @@
   <title>Book a Consultation — Théoden Yegor</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Great+Vibes&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="shared.css" />
 </head>
 <body>
@@ -20,7 +20,8 @@
             <img class="consult-heart" src="heart.png" alt="" width="200" height="160" />
             <span class="consult-rule-line"></span>
           </div>
-          <img class="consult-logo" src="form.png" alt="Impossible Bodies Clinic" />
+          <p class="consult-brand-top">Impossible Bodies</p>
+          <h1 class="consult-brand">Clinic</h1>
           <p class="consult-kicker">Private Consultations</p>
         </header>
 
@@ -30,9 +31,6 @@
           </p>
           <p>
             Please provide the necessary details regarding your inquiry, including the nature of the procedure you wish to discuss and any relevant medical history. All submissions are reviewed privately, and appointments are arranged at the clinic’s discretion.
-          </p>
-          <p>
-            Submission of a request does not guarantee an appointment. Prospective clients will be contacted should their inquiry be of interest to the doctor.
           </p>
         </div>
 
@@ -66,34 +64,30 @@
 
           <label class="consult-field consult-field--full">
             <span>Nature of Inquiry *</span>
-            <textarea name="inquiry" rows="5" required></textarea>
+            <textarea name="inquiry" rows="4" required></textarea>
           </label>
 
           <label class="consult-field consult-field--full">
             <span>Additional Details</span>
-            <textarea name="details" rows="5"></textarea>
+            <textarea name="details" rows="4"></textarea>
           </label>
 
           <button type="submit" class="consult-submit">Submit Request</button>
-          <p class="consult-note" id="consult-note" hidden>
-            Your mail app will open with the clinic already set as the recipient. Press send there.
-          </p>
           <p class="consult-discretion">Your information will be handled with the utmost discretion.</p>
         </form>
       </article>
     </div>
 
-<a class="back" href="index.html" aria-label="Return to categories">
-  <img src="sword.png" alt="" width="394" height="263" />
-</a>
+    <a class="back" href="index.html" aria-label="Return to categories">
+      <img src="sword.png" alt="" width="394" height="263" />
+    </a>
   </main>
 
   <script>
     (() => {
       const DOCTOR_EMAIL = "impossiblebodies.clinic@gmail.com";
       const form = document.getElementById("consult-form");
-      const note = document.getElementById("consult-note");
-      if (!form || !note) return;
+      if (!form) return;
 
       form.addEventListener("submit", (event) => {
         event.preventDefault();
@@ -123,16 +117,14 @@
           details || "—",
         ].join("\r\n");
 
-        const href =
+        window.location.assign(
           "mailto:" +
-          DOCTOR_EMAIL +
-          "?subject=" +
-          encodeURIComponent(subject) +
-          "&body=" +
-          encodeURIComponent(body);
-
-        note.hidden = false;
-        window.location.assign(href);
+            DOCTOR_EMAIL +
+            "?subject=" +
+            encodeURIComponent(subject) +
+            "&body=" +
+            encodeURIComponent(body)
+        );
       });
     })();
   </script>
