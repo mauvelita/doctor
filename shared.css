@@ -919,6 +919,12 @@ body.is-entering .entrance-label {
   margin-top: 1.5rem;
 }
 
+.research-note {
+  margin-top: 0.85rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(48, 48, 48, 0.75);
+}
+
 @media (max-width: 560px) {
   .consult-row {
     grid-template-columns: 1fr;
