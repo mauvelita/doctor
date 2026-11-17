@@ -12,6 +12,7 @@
   --font: "Cormorant Garamond", "EB Garamond", "Bodoni Moda", "Times New Roman", serif;
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
   --dur: 900ms;
+  --sword: 5rem;
 }
 
 *,
@@ -167,7 +168,7 @@ body.is-entering .entrance-label {
   transform: scale(0.988);
 }
 
-/* Main navigation — tight gaps, small sword */
+/* Main navigation — tight gaps, unified sword */
 
 .nav-panel {
   display: flex;
@@ -214,10 +215,16 @@ body.is-entering .entrance-label {
   outline: none;
 }
 
+.nav-ornament,
+.back {
+  width: var(--sword);
+  max-width: var(--sword);
+  flex: 0 0 var(--sword);
+}
+
 .nav-ornament {
   display: block;
   margin-top: 1.15rem;
-  width: min(34vw, 5.5rem);
   opacity: 0.92;
   cursor: pointer;
   background: none;
@@ -232,7 +239,9 @@ body.is-entering .entrance-label {
   outline: none;
 }
 
-.nav-ornament img {
+.nav-ornament img,
+.back img {
+  display: block;
   width: 100%;
   height: auto;
   margin: 0 auto;
@@ -506,7 +515,6 @@ body.is-entering .entrance-label {
   margin-top: clamp(1.85rem, 5vh, 3rem);
   margin-left: auto;
   margin-right: auto;
-  width: min(34vw, 5.5rem);
   opacity: 0.9;
   transition: opacity 550ms var(--ease), transform 550ms var(--ease);
 }
@@ -516,13 +524,6 @@ body.is-entering .entrance-label {
   opacity: 1;
   transform: scale(1.04);
   outline: none;
-}
-
-.back img {
-  display: block;
-  width: 100%;
-  height: auto;
-  margin: 0 auto;
 }
 
 /* Lookbook — framed slideshow (square frame fit, autoplay) */
@@ -537,7 +538,6 @@ body.is-entering .entrance-label {
 
 .look-window {
   position: absolute;
-  /* matches the transparent aperture inside frame.png */
   inset: 6% 5% 7% 5%;
   overflow: hidden;
   border-radius: 0;
@@ -583,7 +583,6 @@ body.is-entering .entrance-label {
   text-align: center;
 }
 
-/* old stack kept in case you still use it elsewhere */
 .gallery {
   display: flex;
   flex-direction: column;
@@ -629,9 +628,7 @@ body.is-entering .entrance-label {
   }
 }
 
-/* ——— Consultation (parchment dossier) ——— */
-
-/* ——— Consultation (parchment dossier) ——— */
+/* ——— Consultation (parchment + logo overlays) ——— */
 
 .page--consult {
   justify-content: flex-start;
@@ -710,35 +707,12 @@ body.is-entering .entrance-label {
   mix-blend-mode: multiply;
 }
 
-.consult-brand-top {
-  margin: 0;
-  font-family: "Great Vibes", "Cormorant Garamond", cursive;
-  font-size: clamp(1.15rem, 3.4vw, 1.55rem);
-  font-weight: 400;
-  letter-spacing: 0.02em;
-  line-height: 1;
-  color: #1a1510;
-  text-transform: none;
-}
-
-.consult-brand {
-  margin: 0.05rem 0 0.4rem;
-  font-family: "Great Vibes", "Cormorant Garamond", cursive;
-  font-size: clamp(2.2rem, 7.5vw, 3.35rem);
-  font-weight: 400;
-  letter-spacing: 0.01em;
-  line-height: 0.9;
-  color: #1a1510;
-  text-transform: none;
-}
-
-.consult-kicker {
-  margin: 0;
-  font-size: clamp(0.52rem, 1.25vw, 0.62rem);
-  font-weight: 500;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: #1a1510;
+.consult-logo {
+  display: block;
+  width: min(78%, 17.5rem);
+  height: auto;
+  margin: 0.2rem auto 0.35rem;
+  mix-blend-mode: multiply;
 }
 
 .consult-intro {
